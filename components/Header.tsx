@@ -1,26 +1,24 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { NavLink as NavLinkType } from '../types';
+import { NAV_LINKS } from '../constants';
+import { NavLink } from '../types';
 import { MenuIcon, CloseIcon } from './IconComponents';
-import { Language } from '../App'; // Assuming Language type is exported from App.tsx
-import { uiStrings } from '../uiStrings';
 
 interface HeaderProps {
   name: string;
   sectionIds: string[];
-  language: Language;
-  toggleLanguage: () => void;
-  navLinks: NavLinkType[];
 }
 
-const Header: React.FC<HeaderProps> = ({ name, sectionIds, language, toggleLanguage, navLinks }) => {
+const Header: React.FC<HeaderProps> = ({ name, sectionIds }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(sectionIds[0] || null);
   const observerRef = useRef<IntersectionObserver | null>(null);
   const headerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    // Set initial active section to the first one if available
     if (sectionIds.length > 0) {
+        // Check if current hash matches any section, otherwise default to first
         const currentHash = window.location.hash.substring(1);
         if (sectionIds.includes(currentHash)) {
             setActiveSection(currentHash);
@@ -29,17 +27,19 @@ const Header: React.FC<HeaderProps> = ({ name, sectionIds, language, toggleLangu
         }
     }
 
-    const headerHeight = headerRef.current?.offsetHeight || 80; 
+    const headerHeight = headerRef.current?.offsetHeight || 80; // Estimate or get dynamically
 
     const observerOptions: IntersectionObserverInit = {
-      root: null,
-      rootMargin: `-${headerHeight + 10}px 0px -${window.innerHeight - headerHeight - 50}px 0px`,
-      threshold: 0.01,
+      root: null, // observing intersections relative to the viewport
+      rootMargin: `-${headerHeight + 10}px 0px -${window.innerHeight - headerHeight - 50}px 0px`, // Detection zone a bit below header
+      threshold: 0.01, // Trigger as soon as a tiny part is visible in the zone
     };
 
     const observerCallback: IntersectionObserverCallback = (entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
+          // Prioritize entries that are "more visible" if multiple are intersecting
+          // This simple logic takes the one that most recently became intersecting
           setActiveSection(entry.target.id);
         }
       });
@@ -68,13 +68,14 @@ const Header: React.FC<HeaderProps> = ({ name, sectionIds, language, toggleLangu
 
   const handleNavLinkClick = (hash: string) => {
     setIsMenuOpen(false);
+    // setActiveSection(hash.substring(1)); // Optionally set active section immediately on click
+    // Smooth scroll will eventually trigger the observer, but this can make it feel more responsive
     const element = document.getElementById(hash.substring(1));
     if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
-  const languageButtonText = `${uiStrings.languageButtonIcon} ${uiStrings.currentLanguageDisplay[language]}`;
 
   return (
     <header ref={headerRef} className="bg-slate-900/80 backdrop-blur-md sticky top-0 z-50 shadow-lg">
@@ -87,10 +88,11 @@ const Header: React.FC<HeaderProps> = ({ name, sectionIds, language, toggleLangu
           {name.split(' ')[0]}<span className="text-slate-100">{name.split(' ').slice(1).join(' ')}</span>
         </a>
         
-        <nav className="hidden md:flex items-center space-x-1">
-          {navLinks.map((link: NavLinkType) => (
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex space-x-1">
+          {NAV_LINKS.map((link: NavLink) => (
             <a
-              key={link.labelEs} // Use a consistent key
+              key={link.label}
               href={link.href}
               onClick={(e) => {
                 e.preventDefault();
@@ -102,26 +104,13 @@ const Header: React.FC<HeaderProps> = ({ name, sectionIds, language, toggleLangu
                   : 'text-slate-300 hover:text-sky-400 hover:bg-sky-500/5'
                 }`}
             >
-              {language === 'es' ? link.labelEs : link.labelEn}
+              {link.label}
             </a>
           ))}
-          <button
-            onClick={toggleLanguage}
-            className="px-3 py-2 rounded-md text-sm text-slate-300 hover:text-sky-400 hover:bg-sky-500/5 transition-colors duration-200 ease-in-out"
-            aria-label={`Switch language to ${language === 'es' ? 'English' : 'Español'}`}
-          >
-            {languageButtonText}
-          </button>
         </nav>
 
-        <div className="md:hidden flex items-center">
-          <button
-            onClick={toggleLanguage}
-            className="mr-3 p-2 rounded-md text-slate-300 hover:text-sky-400 focus:outline-none"
-            aria-label={`Switch language to ${language === 'es' ? 'English' : 'Español'}`}
-          >
-            {languageButtonText}
-          </button>
+        {/* Mobile Menu Button */}
+        <div className="md:hidden">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="text-slate-300 hover:text-sky-400 focus:outline-none"
@@ -133,12 +122,13 @@ const Header: React.FC<HeaderProps> = ({ name, sectionIds, language, toggleLangu
         </div>
       </div>
 
+      {/* Mobile Navigation Menu */}
       {isMenuOpen && (
         <div className="md:hidden bg-slate-800 shadow-xl">
           <nav className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {navLinks.map((link: NavLinkType) => (
+            {NAV_LINKS.map((link: NavLink) => (
               <a
-                key={link.labelEs} // Use a consistent key
+                key={link.label}
                 href={link.href}
                 onClick={(e) => {
                   e.preventDefault();
@@ -150,7 +140,7 @@ const Header: React.FC<HeaderProps> = ({ name, sectionIds, language, toggleLangu
                     : 'text-slate-200 hover:bg-slate-700 hover:text-sky-300'
                   }`}
               >
-                {language === 'es' ? link.labelEs : link.labelEn}
+                {link.label}
               </a>
             ))}
           </nav>

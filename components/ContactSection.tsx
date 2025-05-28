@@ -1,7 +1,6 @@
 import React from 'react';
 import { GitHubIcon, LinkedInIcon, EmailIcon, PhoneIcon, LocationMarkerIcon } from './IconComponents';
-import { Language } from '../App';
-import { uiStrings } from '../uiStrings';
+import { PERSONAL_INFO } from '../constants'; // For placeholder URLs
 
 interface ContactSectionProps {
   id: string;
@@ -10,26 +9,22 @@ interface ContactSectionProps {
   githubUrl?: string;
   phone?: string;
   location?: string;
-  language: Language;
 }
 
-const ContactSection: React.FC<ContactSectionProps> = ({ id, email, linkedinUrl, githubUrl, phone, location, language }) => {
+const ContactSection: React.FC<ContactSectionProps> = ({ id, email, linkedinUrl, githubUrl, phone, location }) => {
+  // Show icons if the URLs are present and not the default placeholder strings.
   const showLinkedIn = linkedinUrl && linkedinUrl !== "https://www.linkedin.com/in/tu-perfil/" && linkedinUrl !== "";
   const showGitHub = githubUrl && githubUrl !== "https://github.com/tu-usuario" && githubUrl !== "";
 
-  const title = uiStrings.contactTitle[language];
-  const subtitle = uiStrings.contactSubtitle[language];
-  const sendMessageText = uiStrings.sendMessage[language];
-  const findMeOnText = uiStrings.findMeOn[language];
 
   return (
     <section id={id} className="py-16 md:py-24 bg-slate-900">
       <div className="container mx-auto px-6 text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-4 text-sky-400">
-          <span className="title-underline">{title}</span>
+          <span className="title-underline">Ponte en Contacto</span>
         </h2>
         <p className="text-slate-300 mb-10 max-w-xl mx-auto text-lg opacity-0-initial animate-fadeInUp animation-delay-200">
-          {subtitle}
+          ¿Tienes alguna pregunta, una propuesta de proyecto o simplemente quieres saludar? ¡No dudes en contactarme!
         </p>
         
         <div className="max-w-md mx-auto bg-slate-800 p-8 rounded-xl shadow-2xl opacity-0-initial animate-fadeInUp animation-delay-400">
@@ -37,7 +32,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id, email, linkedinUrl,
             href={`mailto:${email}`} 
             className="block w-full text-center bg-sky-500 hover:bg-sky-600 text-white font-semibold py-3.5 px-6 rounded-lg text-lg shadow-md transition-all duration-300 hover:scale-105 mb-6 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-opacity-75"
           >
-            {sendMessageText}
+            Envíame un Email
           </a>
 
           {phone && (
@@ -62,7 +57,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ id, email, linkedinUrl,
           )}
           
           {(showLinkedIn || showGitHub || email) && (
-            <p className="text-slate-400 mb-4 text-sm border-t border-slate-700 pt-6">{findMeOnText}</p>
+            <p className="text-slate-400 mb-4 text-sm border-t border-slate-700 pt-6">O encuéntrame en mis redes:</p>
           )}
           <div className="flex justify-center space-x-6">
             {showLinkedIn && (

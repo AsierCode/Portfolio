@@ -1,18 +1,9 @@
 import React from 'react';
 
-export interface LocalizedString {
-  es: string;
-  en: string;
-}
-
-export type LocalizedStringArray = LocalizedString[];
-
 export interface PersonalInfo {
-  name: string; // Name might not be translated, or translated differently
-  taglineEs: string;
-  taglineEn: string;
-  descriptionEs: string;
-  descriptionEn: string;
+  name: string;
+  tagline: string;
+  description: string;
   email: string;
   linkedinUrl?: string;
   githubUrl?: string;
@@ -23,25 +14,21 @@ export interface PersonalInfo {
 }
 
 export interface SkillCategory {
-  nameEs: string;
-  nameEn: string;
+  name: string;
   skills: Skill[];
   icon?: React.ReactNode;
 }
 
 export interface Skill {
-  nameEs: string;
-  nameEn: string;
+  name: string;
   icon?: React.ReactNode; // e.g., an SVG component
 }
 
 export interface Project {
   id: string;
-  titleEs: string;
-  titleEn: string;
-  descriptionEs: string;
-  descriptionEn: string;
-  technologies: string[]; // Technologies are often proper nouns and might not be translated
+  title: string;
+  description: string;
+  technologies: string[];
   imageUrl: string;
   liveUrl?: string;
   repoUrl?: string;
@@ -49,27 +36,21 @@ export interface Project {
 
 export interface NavLink {
   href: string;
-  labelEs: string;
-  labelEn: string;
+  label: string;
 }
 
 export interface EducationEntry {
-  degreeEs: string;
-  degreeEn: string;
-  institutionEs: string;
-  institutionEn: string;
+  degree: string;
+  institution: string;
   years: string;
-  descriptionEs?: string;
-  descriptionEn?: string;
+  description?: string;
 }
 
 export interface ExperienceEntry {
-  companyEs: string;
-  companyEn: string;
-  roleEs: string;
-  roleEn: string;
+  company: string;
+  role: string;
   years: string;
-  // Description can be a single string or an array of bullet points
-  descriptionEs: string | string[];
-  descriptionEn: string | string[];
+  description: string | string[]; // Allow for multiple bullet points
 }
+
+// TestimonialEntry interface removed
