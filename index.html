@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Developer Portfolio - Asier Nuñez</title>
+    <title>Developer Portfolio</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2032%2032%22%20fill%3D%22none%22%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2215%22%20fill%3D%22%230ea5e9%22/%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20font-family%3D%22sans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22bold%22%20fill%3D%22white%22%20dy%3D%22.1em%22%3EA%3C/text%3E%3C/svg%3E" type="image/svg+xml">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -144,6 +144,34 @@
       }
       @keyframes spin {
         to { transform: rotate(360deg); }
+      }
+
+      /* Peeking Cat Animation */
+      .peeking-cat-container {
+        position: fixed;
+        bottom: 0;
+        left: 20px; /* Position from the left edge */
+        width: 80px;  /* Width of the cat SVG */
+        height: 50px; /* Height of the cat SVG */
+        z-index: 1000; /* Above most content */
+        pointer-events: none; /* So it doesn't block interactions */
+        transform: translateY(100%); /* Start fully hidden below the viewport */
+        opacity: 0;
+        transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.4s ease-out;
+      }
+
+      .peeking-cat-container.show {
+        transform: translateY(0); /* Slide into view */
+        opacity: 1;
+      }
+
+      @keyframes catBob {
+        0%, 100% { transform: translateY(0) rotate(-1deg); }
+        50% { transform: translateY(-3px) rotate(1deg); }
+      }
+
+      .peeking-cat-container.show .bobbing-cat {
+        animation: catBob 3s ease-in-out infinite 0.6s; /* Start bobbing after sliding in */
       }
     </style>
   <script type="importmap">

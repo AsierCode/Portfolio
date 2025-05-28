@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowUpIcon } from './IconComponents';
+import { UIStrings } from '../types';
 
-const BackToTopButton: React.FC = () => {
+interface BackToTopButtonProps {
+  uiStrings: UIStrings;
+}
+
+const BackToTopButton: React.FC<BackToTopButtonProps> = ({ uiStrings }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const toggleVisibility = () => {
@@ -31,7 +36,7 @@ const BackToTopButton: React.FC = () => {
       {isVisible && (
         <button
           onClick={scrollToTop}
-          aria-label="Volver arriba"
+          aria-label={uiStrings.BACK_TO_TOP_ARIA}
           className="fixed bottom-6 right-6 bg-sky-500 hover:bg-sky-600 text-white p-3 rounded-full shadow-lg transition-all duration-300 ease-in-out transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-opacity-75 z-50 animate-fadeIn"
         >
           <ArrowUpIcon className="w-6 h-6" />

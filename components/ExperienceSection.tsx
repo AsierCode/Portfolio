@@ -1,13 +1,14 @@
 import React from 'react';
-import { ExperienceEntry } from '../types';
-import { BriefcaseIcon } from './IconComponents'; // Assuming BriefcaseIcon exists
+import { ExperienceEntry as ExperienceEntryType, UIStrings } from '../types'; // Renamed
+import { BriefcaseIcon } from './IconComponents';
 
 interface ExperienceSectionProps {
   id: string;
-  experience: ExperienceEntry[];
+  experience: ExperienceEntryType[];
+  uiStrings: UIStrings;
 }
 
-const ExperienceSection: React.FC<ExperienceSectionProps> = ({ id, experience }) => {
+const ExperienceSection: React.FC<ExperienceSectionProps> = ({ id, experience, uiStrings }) => {
   if (!experience || experience.length === 0) {
     return null;
   }
@@ -16,7 +17,7 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({ id, experience })
     <section id={id} className="py-16 md:py-24 bg-slate-800">
       <div className="container mx-auto px-6">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-sky-400">
-          <span className="title-underline">Experiencia Profesional</span>
+          <span className="title-underline">{uiStrings.EXPERIENCE_TITLE}</span>
         </h2>
         <div className="space-y-12">
           {experience.map((entry, index) => (
@@ -37,7 +38,7 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({ id, experience })
                   <p className="text-md lg:text-lg text-slate-300">{entry.company}</p>
                 </div>
               </div>
-              
+
               {Array.isArray(entry.description) ? (
                 <ul className="list-disc list-inside text-slate-300 text-sm md:text-base leading-relaxed space-y-1.5 mt-3 pl-2 md:pl-14">
                   {entry.description.map((point, i) => (

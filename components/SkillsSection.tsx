@@ -1,17 +1,18 @@
 import React from 'react';
-import { SkillCategory } from '../types';
+import { SkillCategory as SkillCategoryType, UIStrings } from '../types'; // Renamed
 
 interface SkillsSectionProps {
   id: string;
-  skills: SkillCategory[];
+  skills: SkillCategoryType[];
+  uiStrings: UIStrings;
 }
 
-const SkillsSection: React.FC<SkillsSectionProps> = ({ id, skills }) => {
+const SkillsSection: React.FC<SkillsSectionProps> = ({ id, skills, uiStrings }) => {
   return (
     <section id={id} className="py-16 md:py-24 bg-slate-900">
       <div className="container mx-auto px-6">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-sky-400">
-           <span className="title-underline">Mis Habilidades</span>
+           <span className="title-underline">{uiStrings.SKILLS_TITLE}</span>
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {skills.map((category, index) => (
@@ -27,10 +28,10 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ id, skills }) => {
               <ul className="space-y-2.5">
                 {category.skills.map((skill) => (
                   <li key={skill.name} className="flex items-center text-slate-300">
-                    <svg 
-                      className="w-4 h-4 mr-2.5 text-sky-500 flex-shrink-0" 
-                      fill="currentColor" 
-                      viewBox="0 0 20 20" 
+                    <svg
+                      className="w-4 h-4 mr-2.5 text-sky-500 flex-shrink-0"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
                       aria-hidden="true"
                     >
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>

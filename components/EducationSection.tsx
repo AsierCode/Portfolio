@@ -1,13 +1,14 @@
 import React from 'react';
-import { EducationEntry } from '../types';
+import { EducationEntry as EducationEntryType, UIStrings } from '../types'; // Renamed to avoid conflict
 import { AcademicCapIcon } from './IconComponents';
 
 interface EducationSectionProps {
   id: string;
-  education: EducationEntry[];
+  education: EducationEntryType[];
+  uiStrings: UIStrings;
 }
 
-const EducationSection: React.FC<EducationSectionProps> = ({ id, education }) => {
+const EducationSection: React.FC<EducationSectionProps> = ({ id, education, uiStrings }) => {
   if (!education || education.length === 0) {
     return null;
   }
@@ -16,7 +17,7 @@ const EducationSection: React.FC<EducationSectionProps> = ({ id, education }) =>
     <section id={id} className="py-16 md:py-24 bg-slate-900">
       <div className="container mx-auto px-6">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-sky-400">
-          <span className="title-underline">Formación Académica</span>
+          <span className="title-underline">{uiStrings.EDUCATION_TITLE}</span>
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {education.map((entry, index) => (
