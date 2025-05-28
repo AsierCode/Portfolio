@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Developer Portfolio - Asier Nuñez</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Custom scrollbar for a more polished look */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0f172a; /* slate-900, adjusted for consistency */
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #38bdf8; /* sky-400 */
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #0ea5e9; /* sky-500 */
+      }
+      /* Smooth scrolling */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(25px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      @keyframes pulseGlow {
+        0%, 100% { box-shadow: 0 0 6px #0ea5e9, 0 0 12px #0284c7; } /* sky-500, sky-600 */
+        50% { box-shadow: 0 0 18px #38bdf8, 0 0 30px #0ea5e9; } /* sky-400, sky-500 */
+      }
+      @keyframes expandUnderline {
+        from { width: 0; }
+        to { width: 60%; }
+      }
+
+      /* Animations for Hero background shapes - Increased Opacity */
+      @keyframes float1 {
+        0%, 100% { transform: translate(0px, 0px) scale(1); opacity: 0.15; } /* Was 0.06 */
+        25% { transform: translate(25px, -35px) scale(1.05); opacity: 0.25; } /* Was 0.1 */
+        50% { transform: translate(-15px, 20px) scale(0.95); opacity: 0.18; } /* Was 0.07 */
+        75% { transform: translate(20px, 30px) scale(1); opacity: 0.22; }    /* Was 0.09 */
+      }
+      @keyframes float2 {
+        0%, 100% { transform: translate(0px, 0px) scale(1); opacity: 0.12; } /* Was 0.05 */
+        25% { transform: translate(-30px, 25px) scale(1.1); opacity: 0.20; }  /* Was 0.09 */
+        50% { transform: translate(20px, -15px) scale(0.9); opacity: 0.15; }  /* Was 0.06 */
+        75% { transform: translate(-25px, -30px) scale(1.05); opacity: 0.18; }/* Was 0.08 */
+      }
+       @keyframes float3 {
+        0%, 100% { transform: translate(0px, 0px) scale(1); opacity: 0.10; } /* Was 0.04 */
+        33% { transform: translate(15px, 25px) scale(1.08); opacity: 0.18; } /* Was 0.07 */
+        66% { transform: translate(-20px, -10px) scale(0.92); opacity: 0.12; } /* Was 0.05 */
+      }
+
+      @keyframes sparkleAnimation {
+        0%, 100% {
+          opacity: 0;
+          transform: scale(0.5);
+          box-shadow: none;
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1);
+          box-shadow: 0 0 8px #ffffff, 0 0 16px #ffffff, 0 0 24px #38bdf8; /* white and sky-400 */
+        }
+      }
+      
+      @keyframes animateGradientText {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+      }
+
+      .animate-fadeInUp { animation: fadeInUp 0.6s ease-out forwards; } /* Adjusted duration */
+      .animate-fadeIn { animation: fadeIn 0.5s ease-out forwards; } /* Adjusted duration */
+      
+      /* Apply opacity 0 initially for elements that will fade in */
+      .opacity-0-initial { opacity: 0; }
+
+      .animation-delay-100 { animation-delay: 0.1s; }
+      .animation-delay-200 { animation-delay: 0.2s; }
+      .animation-delay-300 { animation-delay: 0.3s; }
+      .animation-delay-400 { animation-delay: 0.4s; }
+      .animation-delay-500 { animation-delay: 0.5s; }
+      .animation-delay-600 { animation-delay: 0.6s; }
+      .animation-delay-700 { animation-delay: 0.7s; }
+      .animation-delay-900 { animation-delay: 0.9s; }
+
+
+      .title-underline {
+        position: relative;
+        display: inline-block;
+        padding-bottom: 8px; /* Space for underline */
+      }
+      .title-underline::after {
+        content: '';
+        position: absolute;
+        height: 3px;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #38bdf8; /* sky-400 */
+        border-radius: 2px;
+        animation: expandUnderline 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s forwards; /* Delay for underline */
+      }
+
+      /* Preloader styles */
+      #preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #0f172a; /* slate-900 */
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 1;
+        transition: opacity 0.5s ease-out, visibility 0.5s ease-out; /* Added visibility transition */
+        visibility: visible;
+      }
+      #preloader.hidden {
+        opacity: 0;
+        visibility: hidden; /* Use visibility to remove from layout flow after transition */
+        pointer-events: none; 
+      }
+      .spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid #38bdf8; /* sky-400 */
+        border-top-color: transparent;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@19.0.0",
+    "react-dom/": "https://esm.sh/react-dom@19.0.0/",
+    "react/": "https://esm.sh/react@19.0.0/"
+  }
+}
+</script>
+</head>
+  <body class="bg-slate-900 text-slate-100 font-sans">
+    <div id="preloader">
+      <div class="spinner"></div>
+    </div>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html><link rel="stylesheet" href="index.css">
+<script src="index.tsx" type="module"></script>
