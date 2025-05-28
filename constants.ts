@@ -311,5 +311,6 @@ export const CONTENT_BY_LANG: Record<Language, LocalizedContent> = {
 
 // Default export of constants is no longer needed as components will get them from App context or props.
 // Exporting individual constants is also deprecated.
-// Export only CONTENT_BY_LANG and Language type.
-export { Language }; // Exporting Language type from here for convenience if needed elsewhere, though it's in types.ts
+// Export only CONTENT_BY_LANG.
+// The Language type should be imported directly from types.ts where it is defined.
+// The line "export { Language };" has been removed.
