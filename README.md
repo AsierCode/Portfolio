@@ -19,7 +19,7 @@ This is a modern, responsive, and customizable portfolio website built to showca
 *   **Icons:** Custom SVG components (inspired by Heroicons)
 *   **Deployment/Hosting:** (Assumed to be on a platform like Netlify, Vercel, or GitHub Pages)
 
-## 👨‍💻 About Asier Nuñez (The Developer)
+## 👨‍💻 About Me
 
 Asier Nuñez is a passionate and practical Full Stack Developer with expertise in creating innovative digital solutions. His skill set spans across mobile (Android/iOS) and web application development, with a strong command of languages and technologies including Kotlin, Java, Python, and JavaScript.
 
