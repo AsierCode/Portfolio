@@ -17,9 +17,6 @@ Soy una persona práctica, con gran capacidad de adaptación y siempre orientado
 *   **Email:** [asierngcode@gmail.com](mailto:asierngcode@gmail.com)
 *   **LinkedIn:** [asier-nuñez-garcia](https://www.linkedin.com/in/asier-nu%C3%B1ez-garcia/)
 *   **GitHub:** [asiercode](https://github.com/asiercode)
-*   **Descargar CV:** [Mi Currículum Vitae](${process.env.CV_URL || 'https://firebasestorage.googleapis.com/v0/b/foodieclub-49432.firebasestorage.app/o/recipe_images%2FCV%20asierNG.pdf?alt=media&token=826c483c-1d54-470e-9be4-3f8d9bc39301'})
-
-*(Nota: El CV se obtiene de una URL en `constants.ts`. Si usas una variable de entorno para el CV, ajústala según sea necesario o reemplaza `process.env.CV_URL` con la URL directa si no está configurada como variable de entorno en el contexto de este README.)*
 
 ## Características del Portafolio
 
