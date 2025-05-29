@@ -106,7 +106,7 @@ const esContent: Omit<LocalizedContent, 'UI_STRINGS'> = {
       description: "MyNextGame es una aplicación web dinámica, desarrollada con React, TypeScript y Vite, diseñada para simplificar la búsqueda de tu próximo videojuego. Conéctate a una extensa base de datos a través de una API externa y explora títulos, filtra por género, plataforma o popularidad, y accede a información detallada para tomar la mejor decisión y sumergirte en tu siguiente aventura digital.",
       technologies: ["React", "TypeScript", "API", "Vite"],
       imageUrl: "https://i.postimg.cc/gjnPN4XC/image.png",
-      liveUrl: "https://mynextgame.netlify.app/",
+      liveUrl: "https://mynextgame.live/",
       repoUrl: "https://github.com/AsierCode/MyNextGameProject",
     },
   ],
