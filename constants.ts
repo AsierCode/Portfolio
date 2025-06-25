@@ -6,8 +6,8 @@ const COMMON_PERSONAL_INFO_NAME = "Asier Nuñez"; // Proper name, likely no tran
 const COMMON_PERSONAL_INFO_EMAIL = "asierngcode@gmail.com";
 const COMMON_PERSONAL_INFO_LINKEDIN = "https://www.linkedin.com/in/asier-nu%C3%B1ez-garcia/";
 const COMMON_PERSONAL_INFO_GITHUB = "https://github.com/asiercode";
-const COMMON_PERSONAL_INFO_CV_URL = "https://firebasestorage.googleapis.com/v0/b/foodieclub-49432.firebasestorage.app/o/recipe_images%2FCV%20asierNG.pdf?alt=media&token=826c483c-1d54-470e-9be4-3f8d9bc39301";
-const COMMON_PERSONAL_INFO_PROFILE_IMAGE = "https://firebasestorage.googleapis.com/v0/b/foodieclub-49432.firebasestorage.app/o/recipe_images%2Fpfp.jpeg?alt=media&token=8823e239-963c-4686-86a0-4bc905374348";
+const COMMON_PERSONAL_INFO_CV_URL = "https://drive.google.com/file/d/10gfdhraB56abCC896oo2Mkb8hOGZDjWE/view?usp=sharing";
+const COMMON_PERSONAL_INFO_PROFILE_IMAGE = "https://i.postimg.cc/C5BFcsdk/1728913248196.jpg";
 const COMMON_PERSONAL_INFO_PHONE = "+34 644905827";
 
 const esContent: Omit<LocalizedContent, 'UI_STRINGS'> = {
